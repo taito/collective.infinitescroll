@@ -15,8 +15,12 @@
 
     $(document).ready(function() {
         var last_page = $('div.listingBar a:last').attr('href');
-        var last_page_paths = last_page.match(/^(.*?b_start:int=)(\d*)(.*?$)/).slice(1);
-        var max_page = (last_page_paths[1]/batch_size)+1;
+        if (last_page) {
+            var last_page_paths = last_page.match(/^(.*?b_start:int=)(\d*)(.*?$)/).slice(1);
+            var max_page = (last_page_paths[1]/batch_size)+1;
+        } else {
+            var max_page = 1;
+        }
 
         $('#content-core').infinitescroll({
             //debug: true,
